@@ -31,22 +31,28 @@ $count_method = 0;
 		<?php if ( 1 < count( $available_methods ) ) : ?>
 			<ul id="shipping_method">
                 <?php
-                //array_shift($available_methods);
+
+                $flat_rate_cost = (int) $available_methods['flat_rate:3']->cost;
+
+                if ( $flat_rate_cost <= 0 ) {
+	                unset( $available_methods['flat_rate:3'] );
+
+                } else {
+	                unset( $available_methods['free_shipping:2'] );
+                }
 
 				foreach ( $available_methods as $method ) : ?>
 					
 					<li>
 						<?php
 
-						if ( $method->label == 'Flat rate' ) {
-							$label = ( (int) $method->cost <= 0 ) ? 'Free Shipping' : wc_cart_totals_shipping_method_label( $method );
-						} else {
-							$label = wc_cart_totals_shipping_method_label( $method );
+						if ( $flat_rate_cost <= 0 ) {
+							$chosen_method = ( $chosen_method == 'flat_rate:3' ) ? 'free_shipping:2' : $chosen_method;
 						}
 
 						printf( '<input type="radio" name="shipping_method[%1$d]" data-index="%1$d" id="shipping_method_%1$d_%2$s" value="%3$s" class="shipping_method" %4$s />
 								<label for="shipping_method_%1$d_%2$s">%5$s</label>',
-							$index, sanitize_title( $method->id ), esc_attr( $method->id ), checked( $method->id, $chosen_method, false ), $label );
+							$index, sanitize_title( $method->id ), esc_attr( $method->id ), checked( $method->id, $chosen_method, false ), wc_cart_totals_shipping_method_label( $method ) );
 
 						do_action( 'woocommerce_after_shipping_rate', $method, $index );
 						?>
@@ -60,13 +66,7 @@ $count_method = 0;
 
                 $method = current( $available_methods );
 
-                if ( $method->label == 'Flat rate' ) {
-                    $label = ( (int) $method->cost <= 0 ) ? 'Free Shipping' : wc_cart_totals_shipping_method_label( $method );
-                } else {
-                    $label = wc_cart_totals_shipping_method_label( $method );
-                }
-
-                printf( '%3$s <input type="hidden" name="shipping_method[%1$d]" data-index="%1$d" id="shipping_method_%1$d" value="%2$s" class="shipping_method" />', $index, esc_attr( $method->id ), $label );
+                printf( '%3$s <input type="hidden" name="shipping_method[%1$d]" data-index="%1$d" id="shipping_method_%1$d" value="%2$s" class="shipping_method" />', $index, esc_attr( $method->id ), wc_cart_totals_shipping_method_label( $method ) );
                 do_action( 'woocommerce_after_shipping_rate', $method, $index );
 
 			?>
