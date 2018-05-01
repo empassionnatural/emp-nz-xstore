@@ -5,9 +5,6 @@
 	<meta name="viewport" content="user-scalable=0, width=device-width, initial-scale=1, maximum-scale=2.0"/>
 	<?php wp_head(); ?>
 	<style>
-		.top-bar{
-          background-color: #393461;         
-        }
 		.shopping-container .cart-bag .badge-number{
 			background-color: #000;
 		}
@@ -21,7 +18,7 @@
 			color: #313131;
 			background-color: #f8f8f8;		
 		}
-		.woocommerce-info b{
+		.woocommerce-info b, .cart-popup .woocommerce-Price-amount{
 			color: #333;			
 		}
 		.woocommerce-checkout.wholesale_customer .quantity.buttons_added{
@@ -51,6 +48,8 @@
 		#wc-stripe-payment-request-wrapper, #wc-stripe-payment-request-button-separator{
 			display: none !important;
 		}
+        ::-moz-selection { background: #d2c5ff !important; }
+        ::selection { background: #d2c5ff !important; }
 	</style>
 </head>
 

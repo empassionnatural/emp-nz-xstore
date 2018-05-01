@@ -35,6 +35,51 @@
 	padding-left: 5px;
 }
 
+/*Fixed bugs woocommerce*/
+.shopping-container .cart-bag .badge-number{
+    background-color: #000;
+}
+.shipping-error{
+    position: relative;
+    top: 10px;
+    color: red;
+}
+.woocommerce-info{
+    border-top-color: #428ebf;
+    color: #313131;
+    background-color: #f8f8f8;
+}
+.woocommerce-info b, .cart-popup .woocommerce-Price-amount{
+    color: #333;
+}
+.woocommerce-checkout.wholesale_customer .quantity.buttons_added{
+    opacity: 1;
+}
+
+.quantity.buttons_added span:hover, table.cart .remove-item:hover,
+input[type=submit]:hover, .btn:hover, .back-top:hover, .button:hover,
+.swiper-entry .swiper-custom-left:hover, .swiper-entry .swiper-custom-right:hover {
+    background-color: #dadada;
+}
+.header-search.act-default [role=searchform] .btn:hover{
+    background-color: #4a4a4a !important;
+}
+table.cart .product-details a:hover, .cart-widget-products .remove:hover, .cart-widget-products a:hover, .shipping-calculator-button, .tabs .tab-title:hover, .next-post .post-info .post-title, .prev-post .post-info .post-title{
+    color: #000 !important;
+}
+.shipping-calculator-button:hover{
+    text-decoration: underline;
+}
+.active.et-opened .tab-title.opened{
+    border: 1px solid #e6e6e6;
+}
+.posts-nav-btn:hover .button:before{
+    color: #cbcbcb;
+}
+#wc-stripe-payment-request-wrapper, #wc-stripe-payment-request-button-separator{
+    display: none !important;
+}
+
 /*Item Highlights*/
 .prod-highlight-wrapper{
 	
