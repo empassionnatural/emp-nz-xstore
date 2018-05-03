@@ -8,23 +8,9 @@
 		.shopping-container .cart-bag .badge-number{
 			background-color: #000;
 		}
-		.shipping-error{
-			position: relative;
-			top: 10px;
-			color: red;
-		}
-		.woocommerce-info{
-			border-top-color: #428ebf;
-			color: #313131;
-			background-color: #f8f8f8;		
-		}
-		.woocommerce-info b, .cart-popup .woocommerce-Price-amount{
-			color: #333;			
-		}
-		.woocommerce-checkout.wholesale_customer .quantity.buttons_added{
-			opacity: 1;
-		}
-		
+        .woocommerce-info b, .cart-popup .woocommerce-Price-amount{
+            color: #333;
+        }
 		.quantity.buttons_added span:hover, table.cart .remove-item:hover,
 		input[type=submit]:hover, .btn:hover, .back-top:hover, .button:hover, 
 		.swiper-entry .swiper-custom-left:hover, .swiper-entry .swiper-custom-right:hover {
@@ -51,6 +37,26 @@
         ::-moz-selection { background: #d2c5ff !important; }
         ::selection { background: #d2c5ff !important; }
 	</style>
+    <script>
+        jQuery(document).ready(function($){
+            $('#place_order').live('click', function(e){
+                $('.shipping-error').remove();
+                $('.shipping').removeClass('error-tr');
+                var checked_shipping = $('.shipping_method:checked').length;
+                //console.log(checked_shipping);
+
+                if(checked_shipping === 0){
+                    e.preventDefault();
+                    e.stopPropagation();
+                    var shipping_error = '<ul class="woocommerce-error" role="alert"><li>Please select your shipping method.</li></ul>';
+                    $('.shipping').addClass('error-tr');
+                    //console.log('NO shipping');
+                    $('<div class="shipping-error">'+shipping_error+'</div>').insertAfter('#payment');
+
+                }
+            });
+        });
+    </script>
 </head>
 
 <body <?php body_class(); ?>>

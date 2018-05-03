@@ -30,6 +30,12 @@ function empdev_custom_admin_scripts(){
 	wp_enqueue_script( 'wc-enhanced-select' );
 }
 
+//enqueue custom scripts
+add_action( 'wp_enqueue_scripts', 'empdev_custom_scripts_frontend', 99 );
+
+function empdev_custom_scripts_frontend(){
+	wp_enqueue_style( 'custom-style', get_stylesheet_directory_uri() . '/css/custom-style.css', array(), '2.6' );
+}
 
 // check for empty-cart get param to clear the cart
 add_action( 'woocommerce_init', 'woocommerce_clear_cart_url' );
@@ -44,4 +50,9 @@ function empdev_add_clear_cart_button() {
 
 	echo '<button class="btn gray" onclick="if(confirm(\'Are you sure to remove all items?\'))window.location=\'//empassion.co.nz/cart/?empty-cart=true\';else event.stopPropagation();event.preventDefault();">' . __( "Empty Cart", "woocommerce" ) . '</button>';
 
+}
+
+//wholesale notice filter
+if( class_exists( 'WWP_Wholesale_Prices' ) ) {
+	require_once( get_stylesheet_directory() . '/woocommerce-wholesale-prices-premium/class-wwpp-wholesale-price-requirement.php' );
 }
