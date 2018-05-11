@@ -5,6 +5,7 @@
 	<meta name="viewport" content="user-scalable=0, width=device-width, initial-scale=1, maximum-scale=2.0"/>
 	<?php wp_head(); ?>
 	<style>
+        /*Fixed bugs woocommerce*/
 		.shopping-container .cart-bag .badge-number{
 			background-color: #000;
 		}
@@ -19,9 +20,12 @@
 		.header-search.act-default [role=searchform] .btn:hover{
 			background-color: #4a4a4a !important;
 		}
-		table.cart .product-details a:hover, .cart-widget-products .remove:hover, .cart-widget-products a:hover, .shipping-calculator-button, .tabs .tab-title:hover, .next-post .post-info .post-title, .prev-post .post-info .post-title{
+        table.cart .product-details a:hover, .cart-widget-products .remove:hover, .cart-widget-products a:hover, .shipping-calculator-button, .tabs .tab-title:hover, .next-post .post-info .post-title, .prev-post .post-info .post-title, .form-submit input[type=submit]{
 			color: #000 !important;
 		}
+        .form-submit input[type=submit]:hover{
+            color: white !important;
+        }
 		.shipping-calculator-button:hover{
 			text-decoration: underline; 			
 		}

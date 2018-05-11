@@ -17,6 +17,10 @@
 .price + form.cart{
     margin-top: 1em;
 }
+.price + a.add_to_cart_button, .wholesale_price_container + a.add_to_cart_button,
+.product-excerpt + a.add_to_cart_button{
+    margin-top: 1.0714em;
+}
 
 /*Conversion*/
 #billing_email_conversio_optin_field{
