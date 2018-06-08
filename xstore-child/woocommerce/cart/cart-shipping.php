@@ -24,6 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $user = wp_get_current_user();
 
 $count_method = 0;
+
 ?>
 <tr class="shipping">
 	<th><?php echo wp_kses_post( $package_name ); ?></th>
@@ -33,10 +34,9 @@ $count_method = 0;
 				<?php
 				//array_shift($available_methods);
 				if( in_array( 'wholesale_customer', $user->roles ) ) :
-					//remove retail shipping for wholesale customer
+					//remove free shipping and flat rate
 					unset( $available_methods['flat_rate:3'] );
 					unset( $available_methods['free_shipping:2'] );
-
 
 					foreach ( $available_methods as $method ) : ?>
 
@@ -57,14 +57,25 @@ $count_method = 0;
                 else :
 
                     $flat_rate_cost = (int) $available_methods['flat_rate:3']->cost;
-                    //remove wholesale shipping for retail customer
-				    unset($available_methods['flat_rate:6']);
 
-                    if ( $flat_rate_cost <= 0 ) {
-                    unset( $available_methods['flat_rate:3'] );
+	                //remove wholesale shipping for retail customer
+	                unset( $available_methods['flat_rate:6'] );
+
+                    if( in_array( 'family_and_friends', $user->roles ) || in_array( 'distributor_owner', $user->roles )) {
+
+                        unset( $available_methods['flat_rate:3'] );
 
                     } else {
-                    unset( $available_methods['free_shipping:2'] );
+
+	                    if ( $flat_rate_cost <= 0 ) {
+		                    //flat rate $7
+		                    unset( $available_methods['flat_rate:3'] );
+	                    } else {
+		                    //free shipping
+		                    unset( $available_methods['free_shipping:2'] );
+
+	                    }
+
                     }
 
                     foreach ( $available_methods as $method ) : ?>
