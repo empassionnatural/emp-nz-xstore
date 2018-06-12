@@ -16,7 +16,9 @@ $posts_per_page = etheme_get_option('related_limit');
 // updated for woocommerce v3.0
 $related = array_map( 'absint', array_values( wc_get_related_products( $product->get_id(), $posts_per_page ) ) );
 
-if ( sizeof( $related ) == 0 ) return;
+$package_deals = has_term( 'package-deals', 'product_cat', $product->get_id() );
+
+if ( sizeof( $related ) == 0 || $package_deals ) return;
 
 echo '<div class="related_prod_container">';
 
