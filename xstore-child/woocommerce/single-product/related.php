@@ -23,13 +23,14 @@ echo '<div class="related_prod_container">';
 echo '<h2 class="products-title"><span>' . esc_html__( 'Related Products', 'xstore' ) . '</span></h2>';
 
 $args = apply_filters( 'woocommerce_related_products_args', array(
-	'post_type'            => 'product',
-	'ignore_sticky_posts'  => 1,
-	'no_found_rows'        => 1,
-	'posts_per_page'       => $posts_per_page,
-	'orderby'              => $orderby,
-	'post__in'             => $related,
-	'post__not_in'         => array( $product->get_id() )
+	'post_type'           => 'product',
+	'ignore_sticky_posts' => 1,
+	'no_found_rows'       => 1,
+	'posts_per_page'      => $posts_per_page,
+	'orderby'             => $orderby,
+	'post__in'            => $related,
+	'post__not_in'        => array( $product->get_id() ),
+	'category__not_in'    => array( '65' )
 ) );
 
 $slider_args = array(
