@@ -35,8 +35,6 @@ add_action( 'wp_enqueue_scripts', 'empdev_custom_scripts_frontend', 99 );
 
 function empdev_custom_scripts_frontend(){
 	wp_enqueue_style( 'custom-style', get_stylesheet_directory_uri() . '/css/custom-style.css', array(), '3.1.1' );
-	wp_enqueue_script( 'momment', 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js' );
-	wp_enqueue_script( 'custom-script', get_stylesheet_directory_uri() . '/js/custom-script.js', array('jquery'), '1.2.4' );
 
 	wp_enqueue_style( 'ultimate-animate' );
 	wp_enqueue_script( 'ultimate-appear' );

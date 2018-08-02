@@ -62,18 +62,6 @@ $count_method = 0;
                     $free_shipping = $available_methods['free_shipping:2'];
 	                $flat_rate_po_box = $available_methods['flat_rate_po_box'];
 
-	                $today = date("F j, Y g:i a");
-	                //$august_1st = strtotime("August 17, 2018 7:00 pm");
-
-                    $august_1st = mktime(0,0,0, 7,24, 2018);
-	                $today_mysql = current_time('mysql');
-	                $today_mysql = strtotime($today_mysql);
-	                $date_today_nz = date( "F j, Y g:i a", $today_mysql );
-
-                    if($today_mysql >= $august_1st ){
-	                    $available_methods['flat_rate:3']->cost = '8.50';
-                    }
-
 	                //remove wholesale shipping for retail customer
 	                unset( $available_methods['flat_rate:6'] );
 
