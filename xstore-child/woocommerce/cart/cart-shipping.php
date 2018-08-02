@@ -37,6 +37,7 @@ $count_method = 0;
 					//remove free shipping and flat rate
 					unset( $available_methods['flat_rate:3'] );
 					unset( $available_methods['free_shipping:2'] );
+					unset( $available_methods['flat_rate_po_box'] );
 
 					foreach ( $available_methods as $method ) : ?>
 
@@ -58,25 +59,62 @@ $count_method = 0;
 
                     $flat_rate_cost = (int) $available_methods['flat_rate:3']->cost;
 
+                    $free_shipping = $available_methods['free_shipping:2'];
+	                $flat_rate_po_box = $available_methods['flat_rate_po_box'];
+
+	                $today = date("F j, Y g:i a");
+	                //$august_1st = strtotime("August 17, 2018 7:00 pm");
+
+                    $august_1st = mktime(0,0,0, 7,24, 2018);
+	                $today_mysql = current_time('mysql');
+	                $today_mysql = strtotime($today_mysql);
+	                $date_today_nz = date( "F j, Y g:i a", $today_mysql );
+
+                    if($today_mysql >= $august_1st ){
+	                    $available_methods['flat_rate:3']->cost = '8.50';
+                    }
+
 	                //remove wholesale shipping for retail customer
 	                unset( $available_methods['flat_rate:6'] );
 
-                    if( in_array( 'family_and_friends', $user->roles ) || in_array( 'distributor_owner', $user->roles )) {
+	                //var_dump($today);
+	                //var_dump($today2);
 
+                    if( in_array( 'family_and_friends', $user->roles ) || in_array( 'distributor_owner', $user->roles )) {
                         unset( $available_methods['flat_rate:3'] );
+                        unset( $available_methods['flat_rate_po_box'] );
 
                     } else {
 
 	                    if ( $flat_rate_cost <= 0 ) {
-		                    //flat rate $7
+		                    //unset flat rate fee
 		                    unset( $available_methods['flat_rate:3'] );
+		                    unset( $available_methods['flat_rate_po_box'] );
+
 	                    } else {
-		                    //free shipping
-		                    unset( $available_methods['free_shipping:2'] );
+
+		                    //unset free shipping
+		                    if ( empty( $flat_rate_po_box ) ) {
+			                    unset( $available_methods['free_shipping:2'] );
+
+		                    } else {
+			                    unset( $available_methods['free_shipping:2'] );
+			                    unset( $available_methods['flat_rate:3'] );
+                            }
 
 	                    }
 
                     }
+
+                    //add free shipping option using coupon free shipping checkbox
+	                foreach ( WC()->cart->get_coupons() as $code => $coupon ) {
+
+		                if( $coupon->get_free_shipping() && $flat_rate_cost > 0 ) {
+			                $available_methods[] = $free_shipping;
+			                unset( $available_methods['flat_rate:3'] );
+		                }
+
+	                }
 
                     foreach ( $available_methods as $method ) : ?>
 

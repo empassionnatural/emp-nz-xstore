@@ -22,7 +22,51 @@
     margin-top: 1.0714em;
 }
 
-/*Conversion*/
+/*Banner*/
+#custom_html-3{
+    display: none;
+}
+
+#custom_html-4{
+    border: none;
+    padding-left: 0;
+    margin-left: 0;
+}
+#custom_html-4 .vc_icon_element-size-md{
+    top: -11px;
+}
+#custom_html-4 .vc_icon_element-icon.fa-gift{
+    transition: all 0.2s ease-in-out;
+}
+#custom_html-4 .vc_icon_element-icon.fa-gift:hover{
+    color: #ffffff !important;
+    cursor: pointer;
+}
+#custom_html-4:before{
+    content: '';
+    width: 42px;
+    height: 42px;
+    background: #369020;
+    border-radius: 50%;
+    position: absolute;
+    right: 24px;
+    transition: all 0.2s ease-in-out;
+}
+#custom_html-4:hover:before{
+    content: '';
+    width: 42px;
+    height: 42px;
+    background: #41b126;
+    border-radius: 50%;
+    position: absolute;
+    right: 24px;
+}
+.single-product-sidebar .widget_custom_html, .single-product-sidebar .wpb_single_image{
+    margin-bottom: 0;
+}
+
+
+    /*Conversion*/
 #billing_email_conversio_optin_field{
     display: none;
 }
@@ -108,6 +152,21 @@
 
 /*Responsive*/
 @media (max-width:1024px){
+    /*banner*/
+    #custom_html-3{
+        display: block;
+    }
+    .post-type-archive-product .page-heading, .single-product .page-heading{
+        padding-bottom: 0;
+    }
+    #custom_html-2{
+        display: none;
+    }
+    #custom_html-3 .wpb_single_image {
+        margin-bottom: 0;
+        margin-top: 25px;
+    }
+
     .header-search.act-default {
         width: 10.5em;
     }

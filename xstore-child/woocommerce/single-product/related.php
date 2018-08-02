@@ -11,6 +11,12 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 global $product, $woocommerce_loop;
 
+
+var_dump(get_currentuserinfo()->user_registered);
+
+
+//printf( '%s member since %s<br>', $udata->data->display_name, date( "M Y", strtotime( $registered ) ) );
+
 $posts_per_page = etheme_get_option('related_limit');
 
 // updated for woocommerce v3.0
@@ -20,7 +26,7 @@ $package_deals = has_term( 'package-deals', 'product_cat', $product->get_id() );
 
 if ( sizeof( $related ) == 0 || $package_deals ) return;
 
-echo '<div class="related_prod_container">';
+echo '<div class="related_prod_container test">';
 
 echo '<h2 class="products-title"><span>' . esc_html__( 'Related Products', 'xstore' ) . '</span></h2>';
 

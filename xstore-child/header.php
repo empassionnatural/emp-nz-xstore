@@ -12,6 +12,9 @@
         .woocommerce-info b, .cart-popup .woocommerce-Price-amount{
             color: #333;
         }
+        .error-tr{
+            outline: 1px solid #b63231;
+        }
 		.quantity.buttons_added span:hover, table.cart .remove-item:hover,
 		input[type=submit]:hover, .btn:hover, .back-top:hover, .button:hover, 
 		.swiper-entry .swiper-custom-left:hover, .swiper-entry .swiper-custom-right:hover {
@@ -73,14 +76,14 @@ $header_type = etheme_get_header_type();
 
 <div class="template-container">
 	<?php if ( is_active_sidebar('top-panel') && etheme_get_option('top_panel') && etheme_get_option('top_bar')): ?>
-		<div class="top-panel-container">
-			<div class="top-panel-inner">
-				<div class="container">
+        <div class="top-panel-container">
+            <div class="top-panel-inner">
+                <div class="container">
 					<?php dynamic_sidebar( 'top-panel' ); ?>
-					<div class="close-panel"></div>
-				</div>
-			</div>
-		</div>
+                    <div class="close-panel"></div>
+                </div>
+            </div>
+        </div>
 	<?php endif ?>
 	<div class="mobile-menu-wrapper">
 		<div class="container">
