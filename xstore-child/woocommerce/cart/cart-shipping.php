@@ -62,6 +62,14 @@ $count_method = 0;
                     $free_shipping = $available_methods['free_shipping:2'];
 	                $flat_rate_po_box = $available_methods['flat_rate_po_box'];
 
+	                $today = date("F j, Y, g:i a");
+
+	                $today2 = current_time('mysql');
+	                $today2 = date( "F j, Y, g:i a", strtotime($today2));
+
+	                echo '<pre style="display: none;">';
+	                var_dump($available_methods);
+	                echo '</pre>';
 	                //remove wholesale shipping for retail customer
 	                unset( $available_methods['flat_rate:6'] );
 
@@ -69,6 +77,7 @@ $count_method = 0;
 	                //var_dump($today2);
 
                     if( in_array( 'family_and_friends', $user->roles ) || in_array( 'distributor_owner', $user->roles )) {
+
                         unset( $available_methods['flat_rate:3'] );
                         unset( $available_methods['flat_rate_po_box'] );
 

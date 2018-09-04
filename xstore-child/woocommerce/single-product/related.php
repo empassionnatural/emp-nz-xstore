@@ -11,24 +11,25 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 global $product, $woocommerce_loop;
 
-
-var_dump(get_currentuserinfo()->user_registered);
-
-
-//printf( '%s member since %s<br>', $udata->data->display_name, date( "M Y", strtotime( $registered ) ) );
-
 $posts_per_page = etheme_get_option('related_limit');
 
 // updated for woocommerce v3.0
 $related = array_map( 'absint', array_values( wc_get_related_products( $product->get_id(), $posts_per_page ) ) );
 
-$package_deals = has_term( 'package-deals', 'product_cat', $product->get_id() );
+$package_deals = has_term( 'package-deals', 'product_cat', 'uncategorised', $product->get_id() );
 
 if ( sizeof( $related ) == 0 || $package_deals ) return;
 
-echo '<div class="related_prod_container test">';
+echo '<div class="related_prod_container">';
 
 echo '<h2 class="products-title"><span>' . esc_html__( 'Related Products', 'xstore' ) . '</span></h2>';
+$get_excluded_related_ids = get_option( 'empdev_exclude_related_posts', false );
+
+foreach( $related as $key => $value ){
+	if( in_array( $value, $get_excluded_related_ids ) ){
+		unset($related[$key]);
+	}
+}
 
 $args = apply_filters( 'woocommerce_related_products_args', array(
 	'post_type'           => 'product',
@@ -38,7 +39,7 @@ $args = apply_filters( 'woocommerce_related_products_args', array(
 	'orderby'             => $orderby,
 	'post__in'            => $related,
 	'post__not_in'        => array( $product->get_id() ),
-	'category__not_in'    => array( '65' )
+	'category__not_in'    => array('65')
 ) );
 
 $slider_args = array(
