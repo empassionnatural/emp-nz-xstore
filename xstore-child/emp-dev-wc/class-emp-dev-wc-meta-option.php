@@ -50,11 +50,50 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 				)
 			);
 
+			woocommerce_wp_checkbox(
+				array(
+					'id' => '_empdev_limit_new_customers',
+					'label' => __( 'Enable new customers only', 'woocommerce' ),
+					'placeholder' => '',
+					'desc_tip' => 'true',
+					'description' => __( 'Only new customers can purchase this product.', 'woocommerce' )
+				)
+
+			);
+
+			woocommerce_wp_text_input(
+				array(
+					'id'          => '_empdev_limit_new_customers_start_date',
+					'label'       => __( 'Enter start date to restrict new customers limit.', 'woocommerce' ),
+					'placeholder' => ''
+				)
+			);
+
 			echo '</div>';
 
 		}
 
 		public function empdev_woocommerce_advance_option_save_product( $post_id ) {
+
+			$new_customers_val = trim( get_post_meta( $post_id, '_empdev_limit_new_customers', true ) );
+
+			$new_customers_val_update = $_POST['_empdev_limit_new_customers'];
+
+			if ( $new_customers_val != $new_customers_val_update ) {
+
+				update_post_meta( $post_id, '_empdev_limit_new_customers', $new_customers_val_update );
+
+			}
+
+			$start_date_val = trim( get_post_meta( $post_id, '_empdev_limit_new_customers_start_date', true ) );
+			$start_date_val_update = sanitize_text_field( $_POST['_empdev_limit_new_customers_start_date'] );
+
+
+			if ( $start_date_val != $start_date_val_update ) {
+
+				update_post_meta( $post_id, '_empdev_limit_new_customers_start_date', $start_date_val_update );
+
+			}
 
 			$meta_related = trim( get_post_meta( $post_id, '_empdev_exclude_related_posts', true ) );
 			$meta_related_new = $_POST['_empdev_exclude_related_posts'];

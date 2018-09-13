@@ -2,7 +2,7 @@
 add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
 function theme_enqueue_styles() {
     wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css', array('bootstrap'));
-    
+
 
     if ( is_rtl() ) {
     	wp_enqueue_style( 'rtl-style', get_template_directory_uri() . '/rtl.css');
@@ -18,7 +18,7 @@ function theme_enqueue_styles() {
 //embed admin scripts
 add_action( 'admin_enqueue_scripts', 'empdev_custom_admin_scripts' );
 
-function empdev_custom_admin_scripts(){	
+function empdev_custom_admin_scripts(){
 
 	wp_register_script( 'select2', WC()->plugin_url() . '/assets/js/select2/select2.full.min.js', array( 'jquery' ) );
 	wp_enqueue_script( 'select2' );
@@ -30,11 +30,20 @@ function empdev_custom_admin_scripts(){
 	wp_enqueue_script( 'wc-enhanced-select' );
 }
 
+add_action( 'wp_enqueue_scripts', 'plugin_scripts', 99 );
+function plugin_scripts() {
+
+	wp_enqueue_style( 'bootstrap-select', get_stylesheet_directory_uri() . '/plugins/bootstrap-select/css/bootstrap-select.css' );
+	wp_enqueue_script( 'bootstrap-core', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js', false, false, true );
+	wp_enqueue_script( 'bootstrap-select', get_stylesheet_directory_uri() . '/plugins/bootstrap-select/js/bootstrap-select.js', array( 'jquery' ), false, false );
+
+}
+
 //enqueue custom scripts
 add_action( 'wp_enqueue_scripts', 'empdev_custom_scripts_frontend', 99 );
 
 function empdev_custom_scripts_frontend(){
-	wp_enqueue_style( 'custom-style', get_stylesheet_directory_uri() . '/css/custom-style.css', array(), '3.1.1' );
+	wp_enqueue_style( 'custom-style', get_stylesheet_directory_uri() . '/css/custom-style.css', array(), '3.1.2' );
 
 	wp_enqueue_style( 'ultimate-animate' );
 	wp_enqueue_script( 'ultimate-appear' );
@@ -53,9 +62,22 @@ function woocommerce_clear_cart_url() {
 }
 add_action( 'woocommerce_cart_actions', 'empdev_add_clear_cart_button', 20 );
 function empdev_add_clear_cart_button() {
+	$blog_url = get_bloginfo('wpurl');
+	echo '<button class="btn gray" onclick="if(confirm(\'Are you sure to remove all items?\'))window.location=\''.$blog_url.'/cart/?empty-cart=true\';else event.stopPropagation();event.preventDefault();">' . __( "Empty Cart", "woocommerce" ) . '</button>';
 
-	echo '<button class="btn gray" onclick="if(confirm(\'Are you sure to remove all items?\'))window.location=\'//empassion.co.nz/cart/?empty-cart=true\';else event.stopPropagation();event.preventDefault();">' . __( "Empty Cart", "woocommerce" ) . '</button>';
+}
 
+add_action( 'woocommerce_init', 'empdev_woocommerce_redirect_product_url' );
+
+function empdev_woocommerce_redirect_product_url() {
+
+	if ( is_user_logged_in() ) {
+
+		if ( isset( $_GET['redirect_permalink'] ) ) {
+			wp_safe_redirect( $_GET['redirect_permalink'], 302 );
+			exit;
+		}
+	}
 }
 
 //wholesale notice filter
@@ -193,3 +215,4 @@ if ( class_exists( 'WJECF_Wrap' ) ) {
 		return $valid;
 	}
 }
+

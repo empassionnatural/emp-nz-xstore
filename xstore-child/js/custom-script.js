@@ -22,4 +22,6 @@ jQuery(document).ready(function($){
         $('#shipping-fee').text('$8.50');
     }
 
+
+
 });
