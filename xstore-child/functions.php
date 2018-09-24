@@ -100,13 +100,15 @@ function empdev_product_banner_widget() {
 	) );
 }
 
-add_filter( 'woocommerce_add_to_cart_validation', 'emddev_conditional_product_in_cart', 10, 2 );
+add_filter( 'woocommerce_add_to_cart_validation', 'emddev_conditional_product_in_cart_dynamic', 10, 2 );
 
 function emddev_conditional_product_in_cart_dynamic( $passed, $product_id ) {
 
 	// HERE define your 4 specific product Ids
 	//$products_ids = array( 7131, 9026 );
 	$products_ids = get_option( 'empdev_purchase_one_at_time', false );
+
+	$addon_product_ids = get_option( 'empdev_enable_addon_checkout', false );
 
 	// Searching in cart for IDs
 	if ( ! WC()->cart->is_empty() && $products_ids != false  ) {
@@ -119,17 +121,27 @@ function emddev_conditional_product_in_cart_dynamic( $passed, $product_id ) {
 			//	// If current product is from the targeted IDs and a another targeted product id in cart
 			if ( in_array( $item_pid, $products_ids ) && in_array( $product_id, $products_ids ) && $product_id != $item_pid ) {
 				$passed = false; // Avoid add to cart
+				$message_title = "Sorry, this product can't be purchased at the same time with other special offers!";
 				break; // Stop the loop
 			}
 		}
 	}
 
-	$product_message_title = trim( get_post_meta( $product_id, '_empdev_purchase_product_title_message', true ) );
-	$product_message_title = ($product_message_title != '') ? $product_message_title : get_the_title( $product_id );
+	if ( WC()->cart->is_empty() ) {
+
+		if ( in_array( $product_id, $addon_product_ids ) ) {
+			$passed        = false; // Avoid add to cart
+			$message_title = "Sorry, you can only purchase this product as an add on, please add item to your cart.";
+
+		}
+	}
+
+//	$product_message_title = trim( get_post_meta( $product_id, '_empdev_purchase_product_title_message', true ) );
+//	$product_message_title = ($product_message_title != '') ? $product_message_title : get_the_title( $product_id );
 
 	if ( ! $passed ) {
 		// Displaying a custom message
-		$message = __( "Sorry, $product_message_title and $product_message_title_cart can't be purchased at the same time! ", "woocommerce" );
+		$message = __( $message_title, "woocommerce" );
 		wc_add_notice( $message, 'error' );
 	}
 

@@ -202,3 +202,39 @@ do_action( 'woocommerce_before_cart' );
 <?php woocommerce_cross_sell_display(); ?>
 
 <?php do_action( 'woocommerce_after_cart' ); ?>
+
+<?php
+    global $product, $woocommerce_loop;
+
+    $addon_products_ids = get_option( 'empdev_enable_addon_checkout', false );
+
+    if ( sizeof( $addon_products_ids ) == 0 || ! $addon_products_ids ) return;
+
+    echo '<div class="related_prod_container">';
+
+    echo '<h2 class="products-title"><span>' . esc_html__( 'Before you go, grab a Super Special!', 'xstore' ) . '</span></h2>';
+
+    $args = array(
+        'post_type'           => 'product',
+        'ignore_sticky_posts' => 1,
+        'no_found_rows'       => 1,
+        'posts_per_page'      => 4,
+        'orderby'             => 'ID',
+        'post__in'            => $addon_products_ids,
+    );
+
+    $slider_args = array(
+        'slider_autoplay' => false,
+        'slider_speed' => 0,
+        'large' => 4,
+        'notebook' => 4,
+        'tablet_land' => 3,
+        'tablet_portrait' => 2,
+    );
+
+    etheme_create_slider( $args, $slider_args );
+
+    echo '</div>';
+
+    wp_reset_postdata();
+?>
