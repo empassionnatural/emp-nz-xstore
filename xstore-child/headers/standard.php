@@ -11,16 +11,16 @@
             <div class="container">
                 <div class="container-wrapper">
                     <div class="header-logo"><?php etheme_logo(); ?></div>
-                    <div class="header-widgets xxx">
+                    <div class="header-widgets">
                         <?php etheme_option('header_custom_block'); ?>
                     </div>
                     <?php etheme_shop_navbar( 'header', array( 'search' ) ); ?>
-                    <a href="#" class="navbar-toggle">
+                    <div class="navbar-toggle">
                         <span class="sr-only"><?php esc_html_e('Menu', 'xstore'); ?></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
-                    </a>
+                    </div>
                 </div>
             </div>
         </header>

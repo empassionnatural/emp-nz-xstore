@@ -1,0 +1,161 @@
+/*
+** Opacity
+*/
+.opacity(@opacity: 0.5) {
+  -moz-opacity: @opacity;
+  -khtml-opacity: @opacity;
+  -webkit-opacity: @opacity;
+  opacity: @opacity;
+  @opperc: @opacity * 100;
+  -ms-filter: ~"progid:DXImageTransform.Microsoft.Alpha(opacity=@{opperc})";
+  filter: ~"alpha(opacity=@{opperc})";
+}
+
+/*
+** Border Radius
+*/
+.border-radius(@radius) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  border-radius: @radius;
+}
+/*
+** CSS3 animation
+*/
+.transition(@value) {
+  -ms-transition: @value;
+  -moz-transition: @value;
+  -o-transition: @value;
+  -webkit-transition: @value;
+}
+
+.perspective(@value) {
+  -o-perspective: @value;
+  -moz-perspective: @value;
+  -ms-perspective: @value;
+  -webkit-perspective: @value;
+}
+
+.transform(@value) {
+  -o-transform: @value;
+  -ms-transform: @value;
+  -moz-transform: @value;
+  -webkit-transform: @value;
+}
+
+.origin(@value) {
+  -o-transform-origin: @value;
+  -ms-transform-origin: @value;
+  -moz-transform-origin: @value;
+  -webkit-transform-origin: @value;
+}
+.rotate(@degrees) {
+  -o-transform: rotate(@degrees);
+  -ms-transform: rotate(@degrees);
+  -moz-transform: rotate(@degrees);
+  -webkit-transform: rotate(@degrees);
+}
+
+.rotateX(@degrees) {
+  -o-transform: rotateX(@degrees);
+  -ms-transform: rotateX(@degrees);
+  -moz-transform: rotateX(@degrees);
+  -webkit-transform: rotateX(@degrees);
+}
+
+.rotateY(@degrees) {
+  -o-transform: rotateY(@degrees);
+  -ms-transform: rotateY(@degrees);
+  -moz-transform: rotateY(@degrees);
+  -webkit-transform: rotateY(@degrees);
+}
+
+.rotateZ(@degrees) {
+  -o-transform: rotateZ(@degrees);
+  -ms-transform: rotateZ(@degrees);
+  -moz-transform: rotateZ(@degrees);
+  -webkit-transform: rotateZ(@degrees);
+}
+
+.rotate3d(@value) {
+  -o-transform: rotate3d(@value);
+  -ms-transform: rotate3d(@value);
+  -moz-transform: rotate3d(@value);
+  -webkit-transform: rotate3d(@value);
+}
+.animation(@behaviour){
+  -webkit-animation:@behaviour;
+  -moz-animation:@behaviour;
+  animation:@behaviour;
+}
+
+
+.box-shadow(@arguments) {
+  box-shadow: @arguments;
+  -moz-box-shadow: @arguments;
+  -webkit-box-shadow: @arguments;
+  -o-box-shadow: @arguments;
+}
+
+.text-shadow(@arguments) {
+  text-shadow: @arguments;
+  -moz-text-shadow: @arguments;
+  -webkit-text-shadow: @arguments;
+  -o-text-shadow: @arguments;
+}
+.box-size(@w: auto, @h: auto)
+{
+  width: @w;
+  height:@h;
+}
+
+.square(@size)
+{
+  width: @size;
+  height: @size;
+}
+.gradient(@color: #F5F5F5, @start: #EEE, @stop: #FFF) {
+  background: @color !important;
+  background: -webkit-gradient(linear,
+  left bottom,
+  left top,
+  color-stop(0, @start),
+  color-stop(1, @stop)) !important;
+  background: -ms-linear-gradient(bottom,
+  @start,
+  @stop) !important;
+  background: -moz-linear-gradient(center bottom,
+  @start 0%,
+  @stop 100%) !important;
+  background: -o-linear-gradient(@stop,
+  @start) !important;
+  filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",@stop,@start)) !important;
+}
+
+.placeholder-color(@color)
+{
+  ::-webkit-input-placeholder {
+    color: @color;
+  }
+
+  :-moz-placeholder {
+    color: @color;
+  }
+
+  ::-moz-placeholder {
+    color: @color;
+  }
+
+  :-ms-input-placeholder {
+    color: @color;
+  }
+}
+
+@-webkit-keyframes rotation {
+  from {
+    .rotate(0deg);
+  }
+  to {
+    .rotate(359deg);
+  }
+}

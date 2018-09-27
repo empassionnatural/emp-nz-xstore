@@ -18,11 +18,6 @@ $related = array_map( 'absint', array_values( wc_get_related_products( $product-
 
 $package_deals = has_term( 'package-deals', 'product_cat', 'uncategorised', $product->get_id() );
 
-if ( sizeof( $related ) == 0 || $package_deals ) return;
-
-echo '<div class="related_prod_container">';
-
-echo '<h2 class="products-title"><span>' . esc_html__( 'Related Products', 'xstore' ) . '</span></h2>';
 $get_excluded_related_ids = get_option( 'empdev_exclude_related_posts', false );
 
 foreach( $related as $key => $value ){
@@ -30,6 +25,13 @@ foreach( $related as $key => $value ){
 		unset($related[$key]);
 	}
 }
+
+if ( sizeof( $related ) == 0 || $package_deals ) return;
+
+
+echo '<div class="related_prod_container">';
+
+echo '<h2 class="products-title"><span>' . esc_html__( 'Related Products', 'xstore' ) . '</span></h2>';
 
 $args = apply_filters( 'woocommerce_related_products_args', array(
 	'post_type'           => 'product',
@@ -39,7 +41,6 @@ $args = apply_filters( 'woocommerce_related_products_args', array(
 	'orderby'             => $orderby,
 	'post__in'            => $related,
 	'post__not_in'        => array( $product->get_id() ),
-	'category__not_in'    => array('65')
 ) );
 
 $slider_args = array(
