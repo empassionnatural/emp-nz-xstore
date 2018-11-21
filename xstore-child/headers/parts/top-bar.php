@@ -28,6 +28,9 @@
                     <?php else: ?>
                     <span class="account-links"><a class="link-login" href="/my-account"><span class="vc_icon_element-icon fa fa-user"></span><span class="log-text">Log In</span> </a> <a class="link-signup" href="/my-account"> Sign Up </a>
                     <?php endif; ?>
+
+                    <?php if((!function_exists('dynamic_sidebar') || !dynamic_sidebar('promotional-header-top-right'))): ?>
+                    <?php endif; ?>
                 </div>
 			</div>
 		</div>

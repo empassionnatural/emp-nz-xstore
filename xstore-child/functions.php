@@ -37,6 +37,7 @@ function plugin_scripts() {
 	wp_enqueue_script( 'bootstrap-core', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js', false, false, true );
 	wp_enqueue_script( 'bootstrap-select', get_stylesheet_directory_uri() . '/plugins/bootstrap-select/js/bootstrap-select.js', array( 'jquery' ), false, false );
 
+	wp_enqueue_script( 'moment-datejs', 'https://momentjs.com/downloads/moment.min.js', array(), false, false );
 }
 
 //enqueue custom scripts
@@ -44,6 +45,7 @@ add_action( 'wp_enqueue_scripts', 'empdev_custom_scripts_frontend', 99 );
 
 function empdev_custom_scripts_frontend(){
 	wp_enqueue_style( 'custom-style', get_stylesheet_directory_uri() . '/css/custom-style.css', array(), '3.1.4' );
+	wp_enqueue_script( 'custom-script', get_stylesheet_directory_uri() . '/js/custom-script.js', array('jquery'), '1.6.1', false );
 
 	wp_enqueue_style( 'ultimate-animate' );
 	wp_enqueue_script( 'ultimate-appear' );
@@ -88,6 +90,7 @@ if( class_exists( 'WWP_Wholesale_Prices' ) ) {
 //EMP Dev Woocommerce
 require_once( get_stylesheet_directory() . '/emp-dev-wc/emp-dev-theme-functions.php' );
 require_once( get_stylesheet_directory() . '/emp-dev-wc/class-emp-dev-wc-meta-option.php' );
+require_once( get_stylesheet_directory() . '/emp-dev-wc/emp-dev-login.php' );
 
 add_action( 'widgets_init', 'empdev_product_banner_widget' );
 function empdev_product_banner_widget() {
@@ -95,6 +98,19 @@ function empdev_product_banner_widget() {
 		'name' => __( 'Before Product Top Banner', 'empassion' ),
 		'id' => 'before-product-top-banner',
 		'description' => __( 'Display banner after breadcrumb on product pages.', 'empassion' ),
+		'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h2 class="widgettitle">',
+		'after_title'   => '</h2>',
+	) );
+}
+
+add_action( 'widgets_init', 'empdev_promotional_widget' );
+function empdev_promotional_widget() {
+	register_sidebar( array(
+		'name' => __( 'Promotional Header Top Right', 'empassion' ),
+		'id' => 'promotional-header-top-right',
+		'description' => __( 'Display promotional header widget.', 'empassion' ),
 		'before_widget' => '<div id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</div>',
 		'before_title'  => '<h2 class="widgettitle">',

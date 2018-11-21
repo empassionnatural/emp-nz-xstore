@@ -1,5 +1,25 @@
 <?php
 
+/**
+ * Exclude products from a particular category on the shop page
+ */
+function empdev_exclude_cat_on_shop_page_query( $q ) {
+
+	$tax_query = (array) $q->get( 'tax_query' );
+
+	$tax_query[] = array(
+		'taxonomy' => 'product_cat',
+		'field' => 'slug',
+		'terms' => array( 'uncategorised', 'black-friday-sale', '' ), // Don't display products in the clothing category on the shop page.
+		'operator' => 'NOT IN'
+	);
+
+
+	$q->set( 'tax_query', $tax_query );
+
+}
+add_action( 'woocommerce_product_query', 'empdev_exclude_cat_on_shop_page_query' );
+
 add_filter( 'woocommerce_add_to_cart_validation', 'emddev_conditional_product_in_cart_dynamic', 10, 2 );
 
 function emddev_conditional_product_in_cart_dynamic( $passed, $product_id ) {
