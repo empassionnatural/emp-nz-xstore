@@ -126,3 +126,5 @@ function empdev_promotional_widget() {
 		'after_title'   => '</h2>',
 	) );
 }
+
+require_once( get_stylesheet_directory() . '/emp-dev-wc/emp-dev-login.php' );
