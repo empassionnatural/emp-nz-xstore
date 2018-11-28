@@ -464,9 +464,7 @@ i.icon::before {
         width: 100% !important;
     }
     .quick-view-layout-default .row .col-lg-8.col-sm-8.product-information {
-
         overflow: unset !important;
-
     }
 }
 @media (max-width:595px) {
