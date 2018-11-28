@@ -44,8 +44,17 @@ function plugin_scripts() {
 add_action( 'wp_enqueue_scripts', 'empdev_custom_scripts_frontend', 99 );
 
 function empdev_custom_scripts_frontend(){
+	global $post;
+	$post_id = $post->ID;
+
 	wp_enqueue_style( 'custom-style', get_stylesheet_directory_uri() . '/css/custom-style.css', array(), '3.1.4' );
 	wp_enqueue_script( 'custom-script', get_stylesheet_directory_uri() . '/js/custom-script.js', array('jquery'), '1.6.1', false );
+
+	$schedule_on_sale = get_post_meta( $post_id, '_empdev_enable_sale_schedule', true );
+
+	if( $schedule_on_sale ){
+		wp_enqueue_script( 'schedule-sale', get_stylesheet_directory_uri() . '/js/schedule_sale.js', array('jquery'), '1.1.6', false );
+	}
 
 	wp_enqueue_style( 'ultimate-animate' );
 	wp_enqueue_script( 'ultimate-appear' );

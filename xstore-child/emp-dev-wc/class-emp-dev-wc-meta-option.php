@@ -91,11 +91,32 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 				)
 			);
 
+			woocommerce_wp_checkbox(
+				array(
+					'id' => '_empdev_enable_sale_schedule',
+					'label' => __( 'Enable scheduled sale', 'woocommerce' ),
+					'placeholder' => '',
+					'desc_tip' => 'true',
+					'description' => __( 'Enable set schedule on sale.', 'woocommerce' )
+				)
+
+			);
+
 			echo '</div>';
 
 		}
 
 		public function empdev_woocommerce_advance_option_save_product( $post_id ) {
+
+			//enable schedule on sale
+			$schedule_on_sale = trim( get_post_meta( $post_id, '_empdev_enable_sale_schedule', true ) );
+			$schedule_on_sale_update = $_POST['_empdev_enable_sale_schedule'];
+
+			if ( $schedule_on_sale != $schedule_on_sale_update ) {
+
+				update_post_meta( $post_id, '_empdev_enable_sale_schedule', $schedule_on_sale_update );
+
+			}
 
 			$product_upsell_price = trim( get_post_meta( $post_id, '_empdev_product_upsell_price', true ) );
 			$product_upsell_price_update = $_POST['_empdev_product_upsell_price'];

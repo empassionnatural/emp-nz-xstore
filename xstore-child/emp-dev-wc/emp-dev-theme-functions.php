@@ -10,7 +10,7 @@ function empdev_exclude_cat_on_shop_page_query( $q ) {
 	$tax_query[] = array(
 		'taxonomy' => 'product_cat',
 		'field' => 'slug',
-		'terms' => array( 'uncategorised', 'black-friday-sale', '' ), // Don't display products in the clothing category on the shop page.
+		'terms' => array( 'uncategorised', 'black-friday-sale' ), // Don't display products in the clothing category on the shop page.
 		'operator' => 'NOT IN'
 	);
 
