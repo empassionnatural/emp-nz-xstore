@@ -47,6 +47,7 @@ function empdev_custom_scripts_frontend(){
 	global $post;
 	$post_id = $post->ID;
 
+    wp_enqueue_style( 'fontawesome-css-style', 'https://use.fontawesome.com/releases/v5.5.0/css/all.css' , array(), '1.1.9' );
     wp_enqueue_style( 'product-custom-style', get_stylesheet_directory_uri() . '/css/product-view.css' , array(), '1.1.8' );
 	wp_enqueue_style( 'custom-style', get_stylesheet_directory_uri() . '/css/custom-style.css', array(), '3.1.4' );
 	wp_enqueue_script( 'custom-script', get_stylesheet_directory_uri() . '/js/custom-script.js', array('jquery'), '1.6.1', false );
