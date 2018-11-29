@@ -254,16 +254,16 @@ function get_all_prod(){
 }
 add_shortcode( 'get_all_prod', 'get_all_prod' );
 
-add_action('woocommerce_after_shop_loop_item_title', 'add_category_loop_item' , 3 );
-function add_category_loop_item()
+add_action('woocommerce_after_shop_loop_item_title', 'empdev_add_category_loop_item' , 3 );
+function empdev_add_category_loop_item()
 {
     global $product;
 
     echo wc_get_product_category_list( $product->get_id(), ', ', '<span class="posted_in">' . _n( count( $product->get_category_ids() ) ) . ' ', '</span>' );
 }
 
-add_action('woocommerce_after_shop_loop_item_title', 'add_star_rating' , 4 );
-function add_star_rating()
+add_action('woocommerce_after_shop_loop_item_title', 'empdev_add_star_rating' , 4 );
+function empdev_add_star_rating()
 {
 
     global $woocommerce, $product;
@@ -273,8 +273,8 @@ function add_star_rating()
 
 }
 
-add_action( 'woocommerce_after_shop_loop_item_title', 'after_shop_loop_item' , 15 );
-function after_shop_loop_item() {
+add_action( 'woocommerce_after_shop_loop_item_title', 'empdev_after_shop_loop_item' , 15 );
+function empdev_after_shop_loop_item() {
     global $post , $product;
     $stock = get_post_meta( $post->ID, '_stock', true );
     if( $product->is_in_stock() ) {
@@ -295,7 +295,7 @@ function link_fontawesomes() {
     echo "<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.5.0/css/all.css' integrity='sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU' crossorigin='anonymous'>";
 }
 
-function quick_view_outofstock() {
+function empdev_quick_view_outofstock() {
     global $post;
     $stock = get_post_meta( $post->ID, '_stock', true );
     if( $stock <= 0 ) {

@@ -122,7 +122,7 @@ if ( etheme_get_option('quick_images') == 'slider') $class .= ' swipers-couple-w
                     <?php else:
 
                         echo '<p class="_stock">';
-                        after_shop_loop_item();
+                        empdev_after_shop_loop_item();
                         echo '</p>';
 
                         ?>
