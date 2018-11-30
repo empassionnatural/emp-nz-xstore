@@ -183,6 +183,8 @@ div.product-to-cart, div.product_meta, div.product-desc {
     display: table !important;
     max-width: 500px !important;
     width: 100% !important;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 .quick-view-info div.price span.wholesale_price_container ins{
     max-width: 426px !important;
@@ -205,54 +207,15 @@ div.product-to-cart, div.product_meta, div.product-desc {
 .quick-view-info .star-rating , .quick-view-info .star-rating span {
     padding-top: 5px !important;
 }
-
-.term-summer-offers .quick-view-popup .quick-view-layout-default .product-information .quick-view-info div.price p.price del span ,
-.term-summer-offers .quick-view-popup .quick-view-layout-default .product-information .quick-view-info div.price p.price ins span {
-    float: none !important;
+.quick-view-layout-default div.quick-view-info div.price .woocommerce-price-suffix {
+    display: inline !important;
 }
-.term-package-deals .quick-view-popup .quick-view-layout-default .product-information .quick-view-info div.price p.price del span ,
-.term-package-deals .quick-view-popup .quick-view-layout-default .product-information .quick-view-info div.price p.price ins span ,
-.woocommerce-cart .quick-view-popup .quick-view-layout-default .product-information .quick-view-info div.price p.price del span ,
-.woocommerce-cart .quick-view-popup .quick-view-layout-default .product-information .quick-view-info div.price p.price ins span {
-    float: none !important;
-}
-.term-summer-offers .quick-view-popup .quick-view-layout-default .product-information .quick-view-info div.price p.price .woocommerce-price-suffix ,
-.term-package-deals .quick-view-popup .quick-view-layout-default .product-information .quick-view-info div.price p.price .woocommerce-price-suffix ,
-.woocommerce-cart  .quick-view-popup .quick-view-layout-default .product-information .quick-view-info div.price p.price .woocommerce-price-suffix  {
-    float: right;
-    position: relative;
-    left: -362px;
-}
-.quick-view-info div.price p.price span.woocommerce-Price-amount.amount ,
-.quick-view-info div.price p.price del.original-computed-price .woocommerce-price-suffix ,
-.quick-view-info div.price p.price span.wholesale_price_container .woocommerce-price-suffix {
-    float: left;
-}
-
-.quick-view-info div.price p.price del.original-computed-price {
-    font-size: 15px !important;
-}
-.quick-view-info div.price p.price del.original-computed-price .woocommerce-Price-amount.amount {
-    text-decoration: line-through;
-}
-.quick-view-info div.price p.price .woocommerce-price-suffix {
-    width: auto !important;
-    padding-top: 15px !important;
-    padding-left: 15px !important;
-    font-size: 13px !important;
-    display: table;
-}
-.quick-view-info div.price p.price del.original-computed-price .woocommerce-price-suffix {
-    padding-top: 7px !important;
-}
-.quick-view-info div.price p.price .wholesale_price_container ins .woocommerce-price-suffix {
-    /*padding-top: 13px !important;*/
+.quick-view-layout-default div.quick-view-info div.price del.original-computed-price .woocommerce-price-suffix {
     display: none !important;
 }
 .quick-view-info div.price p.price .wholesale_price_container .wholesale_price_title {
     font-size: 20px !important;
     position: relative !important;
-    top: -6px !important;
 }
 .product-information-inner .cart .input-quantity {
     display: none;
