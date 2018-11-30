@@ -62,9 +62,9 @@ if ( etheme_get_option('quick_images') == 'slider') $class .= ' swipers-couple-w
                     <div class="rating-link">
                     <?php
                     if($average > 0) {
-                        echo "<p><a href=".get_permalink($post->ID)." target='_blank' rel='noopener'>Write a Review</a></p>";
+                        echo "<p><a href=".get_permalink($post->ID)." target='_self' rel='noopener'>Write a Review</a></p>";
                     } else {
-                        echo "<p>No Reviews Yet. Be the first! <a class='double-rev' href=".get_permalink($post->ID)." target='_blank' rel='noopener'>Write a Review</a></p>";
+                        echo "<p>No Reviews Yet. Be the first! <a class='double-rev' href=".get_permalink($post->ID)." target='_self' rel='noopener'>Write a Review</a></p>";
                     }
                     ?>
                     </div>
