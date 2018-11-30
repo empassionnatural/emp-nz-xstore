@@ -273,6 +273,7 @@ function etheme_get_links($args) {
 
 	return apply_filters('etheme_get_links', $links);
 }
+//wence theme
 add_action('woocommerce_after_shop_loop_item_title', 'empdev_add_category_loop_item' , 3 );
 function empdev_add_category_loop_item()
 {
