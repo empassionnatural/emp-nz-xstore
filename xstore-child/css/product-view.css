@@ -92,9 +92,6 @@ div.product-image-wrapper .stock.out-of-stock {
 .swiper-slide .product-content-image {
     max-height: 240px !important;
 }
-/*.swiper-slide .button.ajax_add_to_cart {*/
-/*    display: block !important;*/
-/*}*/
 .wishlist-disabled.status-publish .content-product .onsale, .swiper-slide .content-product .onsale  {
     z-index: 5 !important;
 }
@@ -145,18 +142,6 @@ div.product-to-cart, div.product_meta, div.product-desc {
     transition-delay: 0ms;
     top: 0 !important;
 }
-
-/*.product-view-default .footer-product span.show-quickly {*/
-    /*width: 115%;*/
-    /*height: 246px;*/
-    /*position: absolute;*/
-    /*top: 0;*/
-    /*left: -15px;*/
-    /*opacity: 0.1;*/
-    /*z-index: -1;*/
-    /*transition: .1s ease !important;*/
-    /*max-width: 266px;*/
-/*}*/
 .product-view-default .footer-product span.show-quickly {
     width: 130%;
     height: 246px;
@@ -221,39 +206,35 @@ div.product-to-cart, div.product_meta, div.product-desc {
     padding-top: 5px !important;
 }
 
+.term-summer-offers .quick-view-popup .quick-view-layout-default .product-information .quick-view-info div.price p.price del span ,
+.term-summer-offers .quick-view-popup .quick-view-layout-default .product-information .quick-view-info div.price p.price ins span {
+    float: none !important;
+}
+.term-package-deals .quick-view-popup .quick-view-layout-default .product-information .quick-view-info div.price p.price del span ,
+.term-package-deals .quick-view-popup .quick-view-layout-default .product-information .quick-view-info div.price p.price ins span ,
+.woocommerce-cart .quick-view-popup .quick-view-layout-default .product-information .quick-view-info div.price p.price del span ,
+.woocommerce-cart .quick-view-popup .quick-view-layout-default .product-information .quick-view-info div.price p.price ins span {
+    float: none !important;
+}
+.term-summer-offers .quick-view-popup .quick-view-layout-default .product-information .quick-view-info div.price p.price .woocommerce-price-suffix ,
+.term-package-deals .quick-view-popup .quick-view-layout-default .product-information .quick-view-info div.price p.price .woocommerce-price-suffix ,
+.woocommerce-cart  .quick-view-popup .quick-view-layout-default .product-information .quick-view-info div.price p.price .woocommerce-price-suffix  {
+    float: right;
+    position: relative;
+    left: -362px;
+}
 .quick-view-info div.price p.price span.woocommerce-Price-amount.amount ,
 .quick-view-info div.price p.price del.original-computed-price .woocommerce-price-suffix ,
 .quick-view-info div.price p.price span.wholesale_price_container .woocommerce-price-suffix {
     float: left;
 }
-.term-package-deals .quick-view-popup .product-content .product-information .quick-view-info div.price p.price del span ,
-.term-package-deals .quick-view-popup .product-content .product-information .quick-view-info div.price p.price ins span ,
-.woocommerce-cart .quick-view-popup .product-content .product-information .quick-view-info div.price p.price del span ,
-.woocommerce-cart .quick-view-popup .product-content .product-information .quick-view-info div.price p.price ins span {
-    float: none !important;
-}
-.term-package-deals .quick-view-popup .product-content .product-information .quick-view-info div.price p.price .woocommerce-price-suffix ,
-.woocommerce-cart  .quick-view-popup .product-content .product-information .quick-view-info div.price p.price .woocommerce-price-suffix  {
-    float: right;
-    position: relative;
-    left: -362px;
-}
+
 .quick-view-info div.price p.price del.original-computed-price {
     font-size: 15px !important;
 }
 .quick-view-info div.price p.price del.original-computed-price .woocommerce-Price-amount.amount {
     text-decoration: line-through;
 }
-/*.quick-view-info div.price p.price del.original-computed-price .woocommerce-Price-amount.amount , .quick-view-info div.price p.price del.original-computed-price .woocommerce-price-suffix {*/
-    /*float: none !important;*/
-/*}*/
-/*.quick-view-info div.price p.price del.original-computed-price .woocommerce-price-suffix {*/
-    /*width: 100% !important;*/
-    /*max-width: 75px;*/
-    /*position: relative;*/
-    /*top: -31px;*/
-    /*left: 46px;*/
-/*}*/
 .quick-view-info div.price p.price .woocommerce-price-suffix {
     width: auto !important;
     padding-top: 15px !important;
@@ -361,7 +342,7 @@ i.icon {
 i.icon::before {
     color: #29abe2 !important;
     font-size:18px !important;
-} 
+}
 .quick-view-layout-default .product-information .product-footer {
     float: left !important;
     height:150px !important;
@@ -426,7 +407,7 @@ i.icon::before {
         top: 0px !important;
         display: table !important;
     }
-	.product-information .sub-title {
+    .product-information .sub-title {
         line-height: 13px !important;
     }
     div.wishlist-disabled {
@@ -496,7 +477,7 @@ i.icon::before {
 }
 @media (max-width:414px) {
     .content-product .product-content-image {
-        max-height: 236px !important;   
+        max-height: 236px !important;
     }
 }
 @media (max-width: 375px) {
