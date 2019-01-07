@@ -99,6 +99,7 @@ if( class_exists( 'WWP_Wholesale_Prices' ) ) {
 //EMP Dev Woocommerce
 require_once( get_stylesheet_directory() . '/emp-dev-wc/emp-dev-theme-functions.php' );
 require_once( get_stylesheet_directory() . '/emp-dev-wc/class-emp-dev-wc-meta-option.php' );
+require_once( get_stylesheet_directory() . '/emp-dev-wc/class-emp-dev-wc-static-helper.php' );
 require_once( get_stylesheet_directory() . '/emp-dev-wc/emp-dev-login.php' );
 
 add_action( 'widgets_init', 'empdev_product_banner_widget' );

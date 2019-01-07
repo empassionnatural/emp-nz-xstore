@@ -38,9 +38,20 @@ $user = wp_get_current_user();
 			<th><?php _e( 'Subtotal', 'woocommerce' ); ?></th>
             <td data-title="<?php esc_attr_e( 'Subtotal', 'woocommerce' ); ?>"><?php wc_cart_totals_subtotal_html(); ?></td>
 		</tr>
+        <?php
 
+        ?>
 
 		<?php foreach ( WC()->cart->get_coupons() as $code => $coupon ) : ?>
+            <tr class="coupon">
+                <th>Coupon Amount</th>
+                <td>
+                    <?php
+                    $amount               = WC()->cart->get_coupon_discount_amount( $coupon->get_code(), WC()->cart->display_cart_ex_tax );
+                    $discount_amount_html = '-' . wc_price( $amount );
+                    ?>
+                </td>
+            </tr>
 			<tr class="cart-discount coupon-<?php echo esc_attr( sanitize_title( $code ) ); ?>">
 				<th><?php wc_cart_totals_coupon_label( $coupon ); ?></th>
 				<td data-title="<?php echo esc_attr( wc_cart_totals_coupon_label( $coupon, false ) ); ?>"><?php wc_cart_totals_coupon_html( $coupon ); ?></td>

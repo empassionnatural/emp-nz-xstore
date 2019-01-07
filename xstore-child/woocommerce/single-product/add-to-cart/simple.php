@@ -48,45 +48,53 @@ $start_date_val    = trim( get_post_meta( $product->get_id(), '_empdev_limit_new
 $start_date_restriction = date( "F j, Y, g:i a", strtotime( $start_date_val ) );
 $start_date_restriction = strtotime( $start_date_restriction );
 $user_registration      = strtotime( $user->user_registered );
+$customer_orders = EMPDEV_WC_Static_Helper::get_recent_order();
 
 if( $new_customers_val ): ?>
 
-	<?php if( $user->ID && $user_registration < $start_date_restriction ) {
+	<?php if( $user->ID && count( $customer_orders ) > 0 ) {
 		echo '<p style="color:red;font-size:18px">This offer is only valid for new customers!</p>';
 	}
 	else {
-		if( is_user_logged_in() && $product->is_in_stock() ){
 
-			do_action( 'woocommerce_before_add_to_cart_form' ); ?>
+		if ( $product->is_in_stock() ) :
 
-            <form class="cart" action="<?php echo esc_url( apply_filters( 'woocommerce_add_to_cart_form_action', $product->get_permalink() ) ); ?>" method="post" enctype='multipart/form-data'>
-				<?php do_action( 'woocommerce_before_add_to_cart_button' ); ?>
+		do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
-				<?php
-				do_action( 'woocommerce_before_add_to_cart_quantity' );
+        <form class="cart" method="post" enctype='multipart/form-data'>
+			<?php
+			// if ( ! $product->is_sold_individually() ) {
 
-				woocommerce_quantity_input( array(
-					'min_value'   => apply_filters( 'woocommerce_quantity_input_min', $product->get_min_purchase_quantity(), $product ),
-					'max_value'   => apply_filters( 'woocommerce_quantity_input_max', $product->get_max_purchase_quantity(), $product ),
-					'input_value' => isset( $_POST['quantity'] ) ? wc_stock_amount( wp_unslash( $_POST['quantity'] ) ) : $product->get_min_purchase_quantity(), // WPCS: CSRF ok, input var ok.
-				) );
+			do_action( 'woocommerce_before_add_to_cart_button' );
+			/**
+			 * @since 3.0.0.
+			 */
 
-				do_action( 'woocommerce_after_add_to_cart_quantity' );
-				?>
+			do_action( 'woocommerce_before_add_to_cart_quantity' );
 
-                <button type="submit" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>" class="single_add_to_cart_button button alt"><?php echo esc_html( $product->single_add_to_cart_text() ); ?></button>
+			woocommerce_quantity_input( array(
+				'min_value'   => apply_filters( 'woocommerce_quantity_input_min', 1, $product ),
+				'max_value'   => apply_filters( 'woocommerce_quantity_input_max', $product->backorders_allowed() ? '' : $product->get_stock_quantity(), $product ),
+				'input_value' => $qty_val
+			) );
 
-				<?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>
-            </form>
+			/**
+			 * @since 3.0.0.
+			 */
+			do_action( 'woocommerce_after_add_to_cart_quantity' );
+			// }
+			?>
 
-			<?php do_action( 'woocommerce_after_add_to_cart_form' );
+            <input type="hidden" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); // updated for woocommerce v3.0 ?>" />
 
-		} else {
+            <button type="submit" data-quantity="<?php echo esc_attr( $qty_val ); ?>" data-product_id="<?php echo esc_attr( $product->get_id() ); ?>" class="<?php echo esc_attr( $btn_class ); ?> single_add_to_cart_button button alt"><?php echo esc_html( $product->single_add_to_cart_text() ); ?></button>
 
-			$product_permalink = get_permalink( $product->get_id() );
-			echo '<a href="/my-account/?redirect_permalink=' . esc_url( $product_permalink ) . '"><button class="single_add_to_cart_button bundle_add_to_cart_button button alt">Login required</button></a>';
+			<?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>
+        </form>
 
-		}
+		<?php do_action( 'woocommerce_after_add_to_cart_form' );
+
+		endif;
 	}
 
 ?>
