@@ -16,7 +16,7 @@
             outline: 1px solid #b63231;
         }
 		.quantity.buttons_added span:hover, table.cart .remove-item:hover,
-		input[type=submit]:hover, .btn:hover, .back-top:hover, .button:hover, 
+		input[type=submit]:hover, .btn:hover, .back-top:hover, .button:hover,
 		.swiper-entry .swiper-custom-left:hover, .swiper-entry .swiper-custom-right:hover {
 			background-color: #dadada;
 		}
@@ -30,7 +30,7 @@
             color: white !important;
         }
 		.shipping-calculator-button:hover{
-			text-decoration: underline; 			
+			text-decoration: underline;
 		}
 		.active.et-opened .tab-title.opened{
 			border: 1px solid #e6e6e6;
