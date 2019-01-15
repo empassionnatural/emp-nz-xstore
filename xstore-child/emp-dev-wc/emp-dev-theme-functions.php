@@ -29,14 +29,18 @@ function empdev_new_customers_redirect_purchase() {
 
 
 add_action('woocommerce_after_cart', 'empdev_new_customers_cart_restriction');
+
+add_action('woocommerce_after_checkout_form', 'empdev_new_customers_cart_restriction');
+
 function empdev_new_customers_cart_restriction(){
 
 	if ( ! WC()->cart->is_empty()  ) {
 
 		$empdev_limit_new_customers_ids = get_option( 'empdev_limit_new_customers_ids', false );
 		$customer_orders = EMPDEV_WC_Static_Helper::get_recent_order();
+		$blog_link = get_bloginfo('url');
 
-        if (is_cart() && ! empty ( $empdev_limit_new_customers_ids ) && count( $customer_orders ) > 0 ){
+        if ( ( is_cart() || is_checkout () ) && ! empty ( $empdev_limit_new_customers_ids ) && count( $customer_orders ) > 0 ){
 
             $cart = WC()->cart->get_cart();
             //var_dump($cart);
@@ -57,7 +61,13 @@ function empdev_new_customers_cart_restriction(){
             if($send_error_notice){
                 wc_clear_notices();
                 $product_title = get_the_title($cart_item_id);
-                $message_title = "Sorry, ".$product_title." is only valid for new customers!";
+
+                if( is_user_logged_in() ){
+	                $message_title = "Sorry, ".$product_title." is only valid for new customers! ";
+                } else {
+	                $message_title = "Login is required to purchase ".$product_title . ". <span><a href='".$blog_link."/my-account/?redirect_permalink=".$blog_link."/cart'>Click here to login.</a></span>";
+                }
+
                 $message = __( $message_title, "woocommerce" );
                 wc_add_notice( $message, 'error' );
             }
