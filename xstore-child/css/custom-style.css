@@ -675,6 +675,25 @@ checkout-button {
 .single-product-default .widget-title {
   text-align: center;
 }
+/* cart page */
+.rp-header.related_prod_container {
+  float: right;
+  width: 72%;
+}
+#gemagiftfront {
+  width: 28% !important;
+  margin-top: 10%;
+}
+@media (max-width:1200px) {
+  .rp-header.related_prod_container {
+    float: unset;
+    width: 100%;
+  }
+  #gemagiftfront {
+    width: 100% !important;
+    margin-top: 0%;
+  }
+}
 /*Responsive*/
 @media (min-width: 1024px) {
   #custom_html-2 .rf-reviews {
