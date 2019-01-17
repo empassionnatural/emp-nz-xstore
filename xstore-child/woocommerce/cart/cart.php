@@ -239,13 +239,13 @@ do_action( 'woocommerce_before_cart' );
 
 <?php
 
-echo '<div class="rp-footer related_prod_container">';
+/*echo '<div class="rp-footer related_prod_container">';
 
 echo '<h2 class="products-title"><span>' . esc_html__( 'Before you go, grab a Super Special!', 'xstore' ) . '</span></h2>';
 
 etheme_create_slider( $args, $slider_args );
 
-echo '</div>';
+echo '</div>';*/
 
 wp_reset_postdata();
 ?>

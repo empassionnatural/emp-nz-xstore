@@ -49,10 +49,10 @@ function empdev_custom_scripts_frontend(){
 
 	if ( is_front_page() ) {
 		wp_enqueue_style('font-lobster-css-style', 'https://fonts.googleapis.com/css?family=Lobster+Two', array(), '1.1.10');
-		wp_enqueue_style('home-custom-style', get_stylesheet_directory_uri() . '/css/home-custom-style.css' , array(), '1.1.10');
+		wp_enqueue_style('home-custom-style', get_stylesheet_directory_uri() . '/css/home-custom-style.css' , array(), '1.2.1');
 	}
 
-	wp_enqueue_style( 'custom-style', get_stylesheet_directory_uri() . '/css/custom-style.css', array(), '3.1.4' );
+	wp_enqueue_style( 'custom-style', get_stylesheet_directory_uri() . '/css/custom-style.css', array(), '3.2.1' );
 	wp_enqueue_script( 'custom-script', get_stylesheet_directory_uri() . '/js/custom-script.js', array('jquery'), '1.6.1', false );
 
 	$schedule_on_sale = get_post_meta( $post_id, '_empdev_enable_sale_schedule', true );

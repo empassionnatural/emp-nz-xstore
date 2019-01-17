@@ -25,6 +25,17 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 
 			woocommerce_wp_checkbox(
 				array(
+					'id' => '_empdev_display_addon_product_section',
+					'label' => __( 'Hide in related products', 'woocommerce' ),
+					'placeholder' => '',
+					'desc_tip' => 'true',
+					'description' => __( 'Setting this option will replace related products as addon product.', 'woocommerce' )
+				)
+
+			);
+
+			woocommerce_wp_checkbox(
+				array(
 					'id' => '_empdev_exclude_related_posts',
 					'label' => __( 'Hide in related products', 'woocommerce' ),
 					'placeholder' => '',
