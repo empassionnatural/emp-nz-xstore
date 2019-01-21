@@ -20,56 +20,98 @@ $package_deals = has_term( 'package-deals', 'product_cat', 'uncategorised', $pro
 
 $get_excluded_related_ids = get_option( 'empdev_exclude_related_posts', false );
 
-foreach( $related as $key => $value ){
-	if( in_array( $value, $get_excluded_related_ids ) ){
-		unset($related[$key]);
+$product_addon = get_post_meta( $product->get_id(), '_empdev_display_addon_product_section', true );
+
+if( $product_addon ){
+
+	$addon_products_ids = get_option( 'empdev_enable_addon_checkout', false );
+
+	if ( sizeof( $addon_products_ids ) == 0 || ! $addon_products_ids ) return;
+
+	echo '<div class="rp-header related_prod_container">';
+
+	echo '<h2 class="products-title"><span>' . esc_html__( 'Before you go, grab a Super Special!', 'xstore' ) . '</span></h2>';
+
+	$args = array(
+		'post_type'           => 'product',
+		'ignore_sticky_posts' => 1,
+		'no_found_rows'       => 1,
+		'posts_per_page'      => 4,
+		'orderby'             => 'ID',
+		'post__in'            => $addon_products_ids,
+	);
+
+	$slider_args = array(
+		'slider_autoplay' => false,
+		'slider_speed' => 0,
+		'large' => 4,
+		'notebook' => 4,
+		'tablet_land' => 3,
+		'tablet_portrait' => 2,
+	);
+
+	etheme_create_slider( $args, $slider_args );
+
+	echo '</div>';
+
+	wp_reset_postdata();
+
+} else {
+
+
+	foreach ( $related as $key => $value ) {
+		if ( in_array( $value, $get_excluded_related_ids ) ) {
+			unset( $related[ $key ] );
+		}
 	}
+
+	if ( sizeof( $related ) == 0 || $package_deals ) {
+		return;
+	}
+
+
+	echo '<div class="related_prod_container">';
+
+	echo '<h2 class="products-title"><span>' . esc_html__( 'Related Products', 'xstore' ) . '</span></h2>';
+
+	$args = apply_filters( 'woocommerce_related_products_args', array(
+		'post_type'           => 'product',
+		'ignore_sticky_posts' => 1,
+		'no_found_rows'       => 1,
+		'posts_per_page'      => $posts_per_page,
+		'orderby'             => $orderby,
+		'post__in'            => $related,
+		'post__not_in'        => array( $product->get_id() ),
+	) );
+
+	$slider_args = array(
+		'slider_autoplay' => false,
+		'slider_speed'    => false,
+		'large'           => 4,
+		'notebook'        => 4,
+		'tablet_land'     => 3,
+		'tablet_portrait' => 2,
+	);
+	$slides      = etheme_get_option( 'related_slides' );
+	if ( is_array( $slides ) ) {
+		if ( ! empty( $slides['padding-top'] ) ) {
+			$slider_args['large'] = $slides['padding-top'];
+		}
+		if ( ! empty( $slides['padding-right'] ) ) {
+			$slider_args['notebook'] = $slides['padding-right'];
+		}
+		if ( ! empty( $slides['padding-bottom'] ) ) {
+			$slider_args['tablet_land'] = $slides['padding-bottom'];
+		}
+		if ( ! empty( $slides['padding-left'] ) ) {
+			$slider_args['tablet_portrait'] = $slides['padding-left'];
+			$slider_args['mobile']          = $slides['padding-left'];
+		}
+	}
+
+	etheme_create_slider( $args, $slider_args );
+
+	echo '</div>';
+
+	wp_reset_postdata();
 }
-
-if ( sizeof( $related ) == 0 || $package_deals ) return;
-
-
-echo '<div class="related_prod_container">';
-
-echo '<h2 class="products-title"><span>' . esc_html__( 'Related Products', 'xstore' ) . '</span></h2>';
-
-$args = apply_filters( 'woocommerce_related_products_args', array(
-	'post_type'           => 'product',
-	'ignore_sticky_posts' => 1,
-	'no_found_rows'       => 1,
-	'posts_per_page'      => $posts_per_page,
-	'orderby'             => $orderby,
-	'post__in'            => $related,
-	'post__not_in'        => array( $product->get_id() ),
-) );
-
-$slider_args = array(
-	'slider_autoplay' => false,
-	'slider_speed' => false,
-	'large' => 4,
-	'notebook' => 4,
-	'tablet_land' => 3,
-	'tablet_portrait' => 2,
-);
-$slides = etheme_get_option('related_slides');
-if ( is_array($slides) ) {
-	if ( !empty($slides['padding-top']) ) {
-		$slider_args['large'] = $slides['padding-top'];
-	}
-	if ( !empty($slides['padding-right']) ) {
-		$slider_args['notebook'] = $slides['padding-right'];
-	}
-	if ( !empty($slides['padding-bottom']) ) {
-		$slider_args['tablet_land'] = $slides['padding-bottom'];
-	}
-	if ( !empty($slides['padding-left']) ) {
-		$slider_args['tablet_portrait'] = $slides['padding-left'];
-		$slider_args['mobile'] = $slides['padding-left'];
-	}
-}
-
-etheme_create_slider( $args, $slider_args );
-
-echo '</div>';
-
-wp_reset_postdata();

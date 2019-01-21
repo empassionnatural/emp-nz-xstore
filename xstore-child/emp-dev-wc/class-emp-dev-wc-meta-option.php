@@ -26,10 +26,10 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 			woocommerce_wp_checkbox(
 				array(
 					'id' => '_empdev_display_addon_product_section',
-					'label' => __( 'Hide in related products', 'woocommerce' ),
+					'label' => __( 'Enable product addon', 'woocommerce' ),
 					'placeholder' => '',
 					'desc_tip' => 'true',
-					'description' => __( 'Setting this option will replace related products as addon product.', 'woocommerce' )
+					'description' => __( 'Activating this option will replace related products as addon product.', 'woocommerce' )
 				)
 
 			);
@@ -118,6 +118,16 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 		}
 
 		public function empdev_woocommerce_advance_option_save_product( $post_id ) {
+
+			//display product addon on pages
+			$display_product_addon = trim( get_post_meta( $post_id, '_empdev_display_addon_product_section', true ) );
+			$display_product_addon_update = $_POST['_empdev_display_addon_product_section'];
+
+			if ( $display_product_addon != $display_product_addon_update ) {
+
+				update_post_meta( $post_id, '_empdev_display_addon_product_section', $display_product_addon_update );
+
+			}
 
 			//enable schedule on sale
 			$schedule_on_sale = trim( get_post_meta( $post_id, '_empdev_enable_sale_schedule', true ) );
