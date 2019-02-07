@@ -15,6 +15,14 @@ global $product, $woocommerce_loop;
 
 $addon_products_ids = get_option( 'empdev_enable_addon_checkout', false );
 
+$exclude_product_addon_ids = get_option( 'empdev_enable_addon_checkout_hide', false );
+
+$filter_addon_product_ids = $addon_products_ids;
+
+if( $exclude_product_addon_ids ){
+	$filter_addon_product_ids = array_diff( $addon_products_ids, $exclude_product_addon_ids );
+}
+
 if ( sizeof( $addon_products_ids ) == 0 || ! $addon_products_ids ) return;
 
 echo '<div class="rp-header related_prod_container">';
@@ -27,7 +35,7 @@ $args = array(
     'no_found_rows'       => 1,
     'posts_per_page'      => 4,
     'orderby'             => 'ID',
-    'post__in'            => $addon_products_ids,
+    'post__in'            => $filter_addon_product_ids,
 );
 
 $slider_args = array(

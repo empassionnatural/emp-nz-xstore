@@ -26,7 +26,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 			woocommerce_wp_checkbox(
 				array(
 					'id' => '_empdev_display_addon_product_section',
-					'label' => __( 'Enable product addon', 'woocommerce' ),
+					'label' => __( 'Replace related product to Sale product addon', 'woocommerce' ),
 					'placeholder' => '',
 					'desc_tip' => 'true',
 					'description' => __( 'Activating this option will replace related products as addon product.', 'woocommerce' )
@@ -94,6 +94,16 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 
 			);
 
+			woocommerce_wp_checkbox(
+				array(
+					'id' => '_empdev_enable_addon_checkout_hide',
+					'label' => __( 'Hide this product in slider view', 'woocommerce' ),
+					'placeholder' => '',
+					'desc_tip' => 'true',
+				)
+
+			);
+
 			woocommerce_wp_text_input(
 				array(
 					'id'          => '_empdev_product_upsell_price',
@@ -118,6 +128,16 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 		}
 
 		public function empdev_woocommerce_advance_option_save_product( $post_id ) {
+
+			//Hide this product in slider view
+			$product_addon_checkout_hide = trim( get_post_meta( $post_id, '_empdev_enable_addon_checkout_hide', true ) );
+			$product_addon_checkout_hide_update = $_POST['_empdev_enable_addon_checkout_hide'];
+
+			if ( $product_addon_checkout_hide != $product_addon_checkout_hide_update ) {
+
+				$this->create_post_option_array_value($product_addon_checkout_hide_update, $post_id, '_empdev_enable_addon_checkout_hide', 'empdev_enable_addon_checkout_hide' );
+
+			}
 
 			//display product addon on pages
 			$display_product_addon = trim( get_post_meta( $post_id, '_empdev_display_addon_product_section', true ) );
